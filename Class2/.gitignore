@@ -1,0 +1,14 @@
+**/.DS_Store
+
+**/.terraform.lock.hcl
+
+# Compiled files
+*.tfstate
+*.tfstate.backup
+*.tfstate.lock.info
+
+# Directories
+.terraform/
+
+*.terraform.tfstate
+*.terraform.tfstate.backup
