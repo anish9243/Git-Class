@@ -1,0 +1,22 @@
+---
+- name: Create control node
+  hosts: localhost
+  remote_user: ec2-user
+  become: false  # want to remain as ec2-user, not root
+
+  tasks:
+    - name: generate SSH key
+      openssh_keypair:
+        path: "~/.ssh/id_rsa"
+        type: rsa
+        size: 4096
+        state: present
+        force: no
+
+    - name: output the public key so that it can be used in creating the managed nodes
+      shell: cat ~/.ssh/id_rsa.pub
+      register: cat_output
+
+    - name: Display the output
+      debug:
+        var: cat_output.stdout

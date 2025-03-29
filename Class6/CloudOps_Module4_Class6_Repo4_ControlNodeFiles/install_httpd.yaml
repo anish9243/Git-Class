@@ -1,0 +1,41 @@
+---
+- name: Install httpd
+  hosts: webservers
+  remote_user: ec2-user
+  become: true
+  
+  tasks:
+    - name: install yum httpd package
+      yum:
+        name: httpd
+        state: present
+
+    - name: copy zip file to remote server
+      copy:
+        src: /home/ec2-user/Einstein.zip
+        dest: /home/ec2-user/Einstein.zip
+
+    - name: Unarchive a file that is already on the remote machine
+      unarchive:
+        src: /home/ec2-user/Einstein.zip
+        dest: /tmp
+        remote_src: yes
+
+    - name: Copy files
+      copy:
+        src: '/tmp/{{item}}'
+        dest: /var/www/html/
+        owner: ec2-user
+        remote_src: true
+      loop:
+        - index.html
+        - einstein.jpg  
+
+    - name: Start and Enable httpd
+      systemd:
+        name: httpd
+        state: started
+        enabled: true
+
+
+

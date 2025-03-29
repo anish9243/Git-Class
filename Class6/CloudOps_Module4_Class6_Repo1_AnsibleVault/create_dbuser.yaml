@@ -1,0 +1,17 @@
+---
+- name: Install mariadb
+  hosts: localhost
+  remote_user: ec2-user
+  become: true
+
+  vars_files:
+    - vars.yaml
+
+  tasks:
+    - name: create user with encrypted password  
+      mysql_user:
+        name: Jane
+        password: "{{ jane_password }}"
+        priv: '*.*:ALL'
+        state: present
+
