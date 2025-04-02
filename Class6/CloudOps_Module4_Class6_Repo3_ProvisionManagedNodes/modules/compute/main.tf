@@ -21,8 +21,8 @@ resource "aws_key_pair" "aws-key" {
 #Create and bootstrap Managed Node Servers
 #===========================================
 resource "aws_instance" "managed_node" {
-  # Creates 3 identical aws ec2 instances
-  count = 3
+  # Creates 4 identical aws ec2 instances
+  count = 4
 
   instance_type               = "t2.micro"
   ami                         = data.aws_ssm_parameter.webserver-ami.value
