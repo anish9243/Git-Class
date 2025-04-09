@@ -1,0 +1,42 @@
+pipeline {
+    agent { 
+        node {
+            label 'Python-Node'
+        }
+    }
+    stages {
+        stage('Lint') {
+            steps {
+                dir('Python') {
+                    sh 'pip3 install -r requirements.txt'
+                    sh 'pylint *.py --exit-zero'
+                }
+            }
+        }
+        stage('Test') {
+            steps {
+                dir('Python') {
+                    sh 'pytest'
+                }
+            }
+        }
+        stage('copy code for deployment'){
+            steps {
+                    dir('Python') {
+                        sh 'rm test*.py'
+                        sh 'rm packages.*'
+                    }
+                    sh 'zip -r gradesApp.zip Python'
+                    sh 'mkdir -p ~/python_deployment && cp ./gradesApp.zip ~/python_deployment'
+                }
+        }
+    }
+    post {
+        success {
+            echo 'Job completed successfully'
+        }
+        failure {
+            echo 'Job failed'
+        }
+    }
+}

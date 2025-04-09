@@ -1,0 +1,26 @@
+---
+- name: Install httpd
+  hosts: appservers
+  remote_user: python-app-server
+  become: false
+  
+  
+  vars:
+    database_ip: "22.22.22.22" # default placeholder value
+
+  tasks:
+    - name: Unarchive the application code
+      unarchive:
+        src: ~/deployments/gradesApp.zip
+        dest: ~/deployments
+        remote_src: yes
+
+    - name: Inject Database IP into the connections file, so that the application can connect
+      ansible.builtin.replace:
+        path: /home/python-app-server/deployments/Python/connection.ini
+        regexp: '\b(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\b'
+        replace: '{{ database_ip }}'
+
+    - name: Install specified python requirements
+      ansible.builtin.pip:
+        requirements: /home/python-app-server/deployments/Python/requirements.txt

@@ -1,0 +1,16 @@
+﻿Course_ID,Course_name,Level,"CREATE TABLE Courses (
+  course_id INT PRIMARY KEY,
+  course_name VARCHAR(255),
+  level VARCHAR(255));"
+1,Introduction to Cloud,Novice,"INSERT INTO Courses (course_id, course_name, level) VALUES (1, 'Introduction to Cloud', 'Novice');"
+2,Introduction to DevOps,Novice,"INSERT INTO Courses (course_id, course_name, level) VALUES (2, 'Introduction to DevOps', 'Novice');"
+3,Introduction to Application Development,Novice,"INSERT INTO Courses (course_id, course_name, level) VALUES (3, 'Introduction to Application Development', 'Novice');"
+4,Infrastructure as Code for Begineers,Novice,"INSERT INTO Courses (course_id, course_name, level) VALUES (4, 'Infrastructure as Code for Begineers', 'Novice');"
+5,Ansible Deep Dive,Intermediate,"INSERT INTO Courses (course_id, course_name, level) VALUES (5, 'Ansible Deep Dive', 'Intermediate');"
+6,Terraform Modules,Intermediate,"INSERT INTO Courses (course_id, course_name, level) VALUES (6, 'Terraform Modules', 'Intermediate');"
+7,Ansible Secrets,Intermediate,"INSERT INTO Courses (course_id, course_name, level) VALUES (7, 'Ansible Secrets', 'Intermediate');"
+8,Encyption in transit,Intermediate,"INSERT INTO Courses (course_id, course_name, level) VALUES (8, 'Encyption in transit', 'Intermediate');"
+9,CiCD toolchain,Intermediate,"INSERT INTO Courses (course_id, course_name, level) VALUES (9, 'CiCD toolchain', 'Intermediate');"
+10,Test Driven Development,Advanced,"INSERT INTO Courses (course_id, course_name, level) VALUES (10, 'Test Driven Development', 'Advanced');"
+11,Container Management Platforms,Advanced,"INSERT INTO Courses (course_id, course_name, level) VALUES (11, 'Container Management Platforms', 'Advanced');"
+12,Container Security,Advanced,"INSERT INTO Courses (course_id, course_name, level) VALUES (12, 'Container Security', 'Advanced');"

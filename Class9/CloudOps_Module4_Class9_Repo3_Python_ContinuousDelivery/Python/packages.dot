@@ -1,0 +1,75 @@
+# dot file generated for StudentGradesApp codebase
+# use the pylint utility pyreverse, but first install graphviz..
+# for mac..
+#   brew install graphviz
+#   pyreverse -o dot ./  (this generates the dot file)
+#   touch  __init__.py (you need an __init__.py to generate the dot file but it can be deleted afterwards
+#       Having the file checked in would require a restructure of test and source files into packages)
+#   dot -Tsvg packages.dot -o packages.svg (convert dot file into svg)
+#   dot file was edited before conversion to svg to change format of test and data classes.
+digraph "packages" {
+rankdir=BT
+charset="utf-8"
+"Application" [color="black", label=<Application>, shape="box", style="solid"];
+"Course" [color="black", fillcolor="dimgrey", label=<<FONT COLOR="WHITE">Course</FONT>>, shape="box", style="filled"];
+"Courses" [color="black", fillcolor="dimgrey", label=<<FONT COLOR="WHITE">Courses</FONT>>, shape="box", style="filled"];
+"Enrollment" [color="black", fillcolor="dimgrey", label=<<FONT COLOR="WHITE">Enrollment</FONT>>, shape="box", style="filled"];
+"EnrollmentHelper" [color="black", label=<EnrollmentHelper>, shape="box", style="solid"];
+"Enrollments" [color="black", fillcolor="dimgrey", label=<<FONT COLOR="WHITE">Enrollments</FONT>>, shape="box", style="filled"];
+"Grade" [color="black", fillcolor="dimgrey", label=<<FONT COLOR="WHITE">Grade</FONT>>, shape="box", style="filled"];
+"Grades" [color="black", fillcolor="dimgrey", label=<<FONT COLOR="WHITE">Grades</FONT>>, shape="box", style="filled"];
+"GradingHelper" [color="black", label=<GradingHelper>, shape="box", style="solid"];
+"MariaDBConnect" [color="black", label=<MariaDBConnect>, shape="box", style="solid"];
+"Student" [color="black", fillcolor="dimgrey", label=<<FONT COLOR="WHITE">Student</FONT>>, shape="box", style="filled"];
+"Students" [color="black", fillcolor="dimgrey", label=<<FONT COLOR="WHITE">Students</FONT>>, shape="box", style="filled"];
+"Utilities" [color="black", label=<Utilities>, shape="box", style="solid"];
+"test_Course" [color="black", fillcolor="blueviolet", label=<<FONT COLOR="WHITE">test_Course</FONT>>, shape="box", style="filled"];
+"test_Courses" [color="black", fillcolor="blueviolet", label=<<FONT COLOR="WHITE">test_Courses</FONT>>, shape="box", style="filled"];
+"test_Enrollment" [color="black", fillcolor="blueviolet", label=<<FONT COLOR="WHITE">test_Enrollment</FONT>>, shape="box", style="filled"];
+"test_EnrollmentHelper" [color="black", fillcolor="blueviolet", label=<<FONT COLOR="WHITE">test_EnrollmentHelper</FONT>>, shape="box", style="filled"];
+"test_Enrollments" [color="black", fillcolor="blueviolet", label=<<FONT COLOR="WHITE">test_Enrollments</FONT>>, shape="box", style="filled"];
+"test_Grade" [color="black", fillcolor="blueviolet", label=<<FONT COLOR="WHITE">test_Grade</FONT>>, shape="box", style="filled"];
+"test_Grades" [color="black", fillcolor="blueviolet", label=<<FONT COLOR="WHITE">test_Grades</FONT>>, shape="box", style="filled"];
+"test_GradingHelper" [color="black", fillcolor="blueviolet", label=<<FONT COLOR="WHITE">test_GradingHelper</FONT>>, shape="box", style="filled"];
+"test_Student" [color="black", fillcolor="blueviolet", label=<<FONT COLOR="WHITE">test_Student</FONT>>, shape="box", style="filled"];
+"test_Students" [color="black", fillcolor="blueviolet", label=<<FONT COLOR="WHITE">test_Students</FONT>>, shape="box", style="filled"];
+"Application" -> "Courses" [arrowhead="open", arrowtail="none"];
+"Application" -> "EnrollmentHelper" [arrowhead="open", arrowtail="none"];
+"Application" -> "Enrollments" [arrowhead="open", arrowtail="none"];
+"Application" -> "Grades" [arrowhead="open", arrowtail="none"];
+"Application" -> "GradingHelper" [arrowhead="open", arrowtail="none"];
+"Application" -> "MariaDBConnect" [arrowhead="open", arrowtail="none"];
+"Application" -> "Students" [arrowhead="open", arrowtail="none"];
+"Courses" -> "Course" [arrowhead="open", arrowtail="none"];
+"Courses" -> "Utilities" [arrowhead="open", arrowtail="none"];
+"EnrollmentHelper" -> "Enrollments" [arrowhead="open", arrowtail="none"];
+"EnrollmentHelper" -> "Students" [arrowhead="open", arrowtail="none"];
+"Enrollments" -> "Enrollment" [arrowhead="open", arrowtail="none"];
+"Enrollments" -> "Utilities" [arrowhead="open", arrowtail="none"];
+"Grades" -> "Grade" [arrowhead="open", arrowtail="none"];
+"Grades" -> "Utilities" [arrowhead="open", arrowtail="none"];
+"GradingHelper" -> "Courses" [arrowhead="open", arrowtail="none"];
+"GradingHelper" -> "Enrollments" [arrowhead="open", arrowtail="none"];
+"GradingHelper" -> "Grades" [arrowhead="open", arrowtail="none"];
+"Students" -> "Student" [arrowhead="open", arrowtail="none"];
+"Students" -> "Utilities" [arrowhead="open", arrowtail="none"];
+"test_Course" -> "Course" [arrowhead="open", arrowtail="none"];
+"test_Courses" -> "Course" [arrowhead="open", arrowtail="none"];
+"test_Courses" -> "Courses" [arrowhead="open", arrowtail="none"];
+"test_Enrollment" -> "Enrollment" [arrowhead="open", arrowtail="none"];
+"test_EnrollmentHelper" -> "EnrollmentHelper" [arrowhead="open", arrowtail="none"];
+"test_EnrollmentHelper" -> "Enrollments" [arrowhead="open", arrowtail="none"];
+"test_EnrollmentHelper" -> "Students" [arrowhead="open", arrowtail="none"];
+"test_Enrollments" -> "Enrollment" [arrowhead="open", arrowtail="none"];
+"test_Enrollments" -> "Enrollments" [arrowhead="open", arrowtail="none"];
+"test_Grade" -> "Grade" [arrowhead="open", arrowtail="none"];
+"test_Grades" -> "Grade" [arrowhead="open", arrowtail="none"];
+"test_Grades" -> "Grades" [arrowhead="open", arrowtail="none"];
+"test_GradingHelper" -> "Courses" [arrowhead="open", arrowtail="none"];
+"test_GradingHelper" -> "Enrollments" [arrowhead="open", arrowtail="none"];
+"test_GradingHelper" -> "Grades" [arrowhead="open", arrowtail="none"];
+"test_GradingHelper" -> "GradingHelper" [arrowhead="open", arrowtail="none"];
+"test_Student" -> "Student" [arrowhead="open", arrowtail="none"];
+"test_Students" -> "Student" [arrowhead="open", arrowtail="none"];
+"test_Students" -> "Students" [arrowhead="open", arrowtail="none"];
+}

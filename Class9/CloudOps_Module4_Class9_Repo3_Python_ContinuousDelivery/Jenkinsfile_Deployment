@@ -1,0 +1,57 @@
+pipeline {
+    agent { 
+        node {
+            label 'Python-Node'
+        }
+    }
+
+    parameters {
+        string(name: 'APP_NODE_IP', description: 'IP address of Python App Server', defaultValue: '33.33.33.33')
+        string(name: 'DB_NODE_IP', description: 'IP address of DB Server', defaultValue: '44.44.44.44')
+    }
+    
+     stages {
+         stage('SCP copy') {
+             steps {
+                    withCredentials([sshUserPrivateKey(credentialsId: 'python-app-server', keyFileVariable: 'MY_SSH_KEY')]) {
+                        sh "echo '${params.APP_NODE_IP}' >> hosts.ini"
+                        sh 'ssh -o StrictHostKeyChecking=no -i $MY_SSH_KEY python-app-server@${APP_NODE_IP} \"mkdir -p ~/deployments\"' 
+                        sh 'scp -i $MY_SSH_KEY /home/python-node/python_deployment/gradesApp.zip python-app-server@${APP_NODE_IP}:~/deployments'
+                }
+            }
+        }
+        
+        stage('run Ansible Playbook') {
+             steps {
+                    // running this 1st (commented out) command locally on the Python node (with the public key from that node 
+                    // added to the app server authorized keys) is a good way to confirm that the Ansible part is OK, before layering on Jenkins, etc
+                    // sh 'ansible-playbook -i hosts.ini python_deployment.yml --extra-vars \"database_ip=${DB_NODE_IP}\"'
+                    // using the ansiblePlaybook is better though as it uses the Ansible instance used in the setup and Jenkins managed credentials
+                    ansiblePlaybook(
+                        credentialsId: 'python-app-server', 
+                        disableHostKeyChecking: true, 
+                        extraVars: [database_ip:  '${DB_NODE_IP}' ], 
+                        installation: 'ANSIBLE', 
+                        inventory: 'hosts.ini', 
+                        playbook: 'python_deployment.yml', 
+                        vaultTmpPath: '')
+            }
+        }
+
+        stage('run Application') {
+             steps {
+                    withCredentials([sshUserPrivateKey(credentialsId: 'python-app-server', keyFileVariable: 'MY_SSH_KEY')]) {
+                        sh 'ssh -i $MY_SSH_KEY python-app-server@${APP_NODE_IP} \"cd /home/python-app-server/deployments/Python; chmod 755 start.sh; nohup ./start.sh 0<&- &>/dev/null &\"' 
+                }
+            }
+        }
+    }
+        post {
+        success {
+            echo 'Job completed successfully'
+        }
+        failure {
+            echo 'Job failed'
+        }
+    }
+}

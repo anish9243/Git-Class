@@ -1,0 +1,20 @@
+**/.DS_Store
+**/__pycache__/ 
+**/.pytest_cache/ 
+
+Terraform/**.tfstate**
+Terraform/.terraform/**
+Terraform/.terraform.lock.hcl
+**/.DS_Store
+
+**/id_rsa.pub
+
+**/.terraform.lock.hcl
+
+# Compiled files
+*.tfstate
+*.tfstate.backup
+*.tfstate.lock.info
+
+# Directories
+.terraform/
